@@ -82,7 +82,7 @@ variable "domain_name" {
 }
 
 ##############################################################################
-# Application Services - Gunicorn, Nginx, Celery Worker, etc.
+# Application Services - Gunicorn, Nginx, Celery Worker, Celery Beat
 ##############################################################################
 
 # Shared
@@ -102,7 +102,7 @@ variable "django_settings_module" {
   default     = "backend.settings.production"
 }
 
-# api
+# Gunicorn (Django/Rest API/Web Server)
 
 variable "gunicorn_command" {
   description = "Command used to start gunicorn container"
@@ -122,7 +122,7 @@ variable "gunicorn_memory" {
   type        = number
 }
 
-# frontend
+# Nginx (Frontend, etc)
 
 variable "nginx_command" {
   description = "Command to run in the frontend container"
@@ -142,7 +142,7 @@ variable "nginx_memory" {
   type        = number
 }
 
-# Celery worker
+# Celery Worker
 
 variable "celery_worker_command" {
   description = "Command used to start celery worker"
@@ -157,6 +157,26 @@ variable "celery_worker_cpu" {
 }
 
 variable "celery_worker_memory" {
+  default     = 512
+  description = "Amount (in MiB) of memory to allocate for this task"
+  type        = number
+}
+
+# Celery Beat
+
+variable "celery_beat_command" {
+  default     = ["celery", "--app=backend.celery_app:app", "beat", "--loglevel=INFO"]
+  description = "Command used to start celery beat"
+  type        = list(string)
+}
+
+variable "celery_beat_cpu" {
+  default     = 256
+  description = "CPU to allocate for this task (256 = 0.25 vCPU)"
+  type        = number
+}
+
+variable "celery_beat_memory" {
   default     = 512
   description = "Amount (in MiB) of memory to allocate for this task"
   type        = number

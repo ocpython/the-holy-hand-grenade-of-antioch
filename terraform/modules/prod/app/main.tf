@@ -123,7 +123,7 @@ module "nginx" {
 }
 
 ###############################################################################
-# Celery - Default Worker
+# Celery Worker ("default" queue)
 ###############################################################################
 
 module "celery_worker" {
@@ -147,6 +147,26 @@ module "celery_worker_autoscaling" {
   cluster_name = "${terraform.workspace}-cluster"
   service_name = "${terraform.workspace}-celery_worker"
   depends_on   = [module.celery_worker]
+}
+
+###############################################################################
+# Celery Beat
+###############################################################################
+
+module "celery_beat" {
+  source             = "../../internal/ecs/prod/celery_beat"
+  name               = "celery_beat"
+  ecs_cluster_id     = module.ecs.cluster_id
+  app_sg_id          = var.app_sg_id
+  task_role_arn      = var.task_role_arn
+  execution_role_arn = var.execution_role_arn
+  command            = var.celery_beat_command
+  env_vars           = concat(local.env_vars, var.extra_env_vars)
+  image              = local.be_image
+  region             = var.region
+  cpu                = var.celery_beat_cpu
+  memory             = var.celery_beat_memory
+  private_subnet_ids = var.private_subnet_ids
 }
 
 ###############################################################################

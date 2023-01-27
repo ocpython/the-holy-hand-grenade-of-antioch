@@ -73,6 +73,10 @@ poetry-runserver-plus:
 poetry-celery-worker:
 	cd backend && poetry run python3 manage.py start_celery_worker
 
+## start celery beat
+poetry-celery-beat:
+	cd backend && poetry run python3 manage.py start_celery_beat
+
 ## open a Django shell with shell_plus from django-extensions
 poetry-shell:
 	cd backend && poetry run python3 manage.py shell_plus
@@ -183,9 +187,13 @@ venv-black:
 ## Formate code using flake8 and black
 venv-format: venv-flake8	venv-black
 
-## Start celery worker (with celery beat) that will reload on code changes
+## Start celery worker
 venv-celery-worker:
 	cd backend && python3 manage.py start_celery_worker
+
+## Start celery beat
+venv-celery-beat:
+	cd backend && python3 manage.py start_celery_beat
 
 ## Start flower for debugging and monitoring celery tasks and workers
 venv-flower:
