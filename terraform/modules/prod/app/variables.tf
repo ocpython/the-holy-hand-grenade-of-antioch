@@ -102,7 +102,7 @@ variable "django_settings_module" {
   default     = "backend.settings.production"
 }
 
-# api
+# Gunicorn (Django/Rest API/Web Server)
 
 variable "gunicorn_command" {
   description = "Command used to start gunicorn container"
@@ -122,7 +122,7 @@ variable "gunicorn_memory" {
   type        = number
 }
 
-# frontend
+# Nginx (Frontend, etc)
 
 variable "nginx_command" {
   description = "Command to run in the frontend container"
@@ -142,7 +142,7 @@ variable "nginx_memory" {
   type        = number
 }
 
-# Celery worker
+# Celery Worker
 
 variable "celery_worker_command" {
   description = "Command used to start celery worker"
