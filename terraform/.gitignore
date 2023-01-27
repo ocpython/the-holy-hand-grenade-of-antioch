@@ -1,5 +1,4 @@
 .terraform
-.terraform.lock.hcl
 local.tfvars
 backend.config
 errored.tfstate

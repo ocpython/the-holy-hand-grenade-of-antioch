@@ -10,14 +10,15 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region     = var.region
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
 }
 
 # S3 bucket for storing state file
 resource "aws_s3_bucket" "this" {
-  bucket = "${var.backend_name}-bucket"
+  bucket = "${var.resource_prefix}-terraform-state"
+  # force_destroy = true
 
   lifecycle {
     prevent_destroy = true
@@ -33,7 +34,7 @@ resource "aws_s3_bucket_versioning" "this" {
 
 # DynamoDB table for locking the state file
 resource "aws_dynamodb_table" "this" {
-  name           = "${var.backend_name}-lock-table"
+  name           = "${var.resource_prefix}-terraform-lock-table"
   hash_key       = "LockID"
   read_capacity  = 20
   write_capacity = 20
@@ -52,6 +53,7 @@ resource "aws_dynamodb_table" "this" {
 resource "aws_ecr_repository" "backend" {
   name                 = "backend"
   image_tag_mutability = "MUTABLE"
+  # force_delete         = true
 
   image_scanning_configuration {
     scan_on_push = true
@@ -62,6 +64,7 @@ resource "aws_ecr_repository" "backend" {
 resource "aws_ecr_repository" "frontend" {
   name                 = "frontend"
   image_tag_mutability = "MUTABLE"
+  # force_delete         = true
 
   image_scanning_configuration {
     scan_on_push = true

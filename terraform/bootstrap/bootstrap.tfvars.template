@@ -4,4 +4,4 @@
 region = "us-west-2"
 aws_access_key_id = "REPLACE_ME"
 aws_secret_access_key = "REPLACE_ME"
-backend_name = "com-my-project-terraform"
+resource_prefix = "com-my-project"

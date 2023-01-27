@@ -10,4 +10,4 @@ variable "key" {
   default = "terraform-state"
 }
 
-variable "backend_name" {}
+variable "resource_prefix" {}
