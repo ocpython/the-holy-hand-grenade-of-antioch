@@ -63,7 +63,6 @@ Here's what you'll need:
    1. `your_username/myproject` - with your actual github username and repo 
    1. `my-project.com` - with your project's actual domain name
    1. `com-my-project` - with your *reverse domain name*  (Note: all "." are replaced with "-")
-   1. `myproject` - with your project name 
 
 ## Run in Development
 
@@ -114,3 +113,65 @@ You can confirm frontend works (browser should open automatically): [http://loca
 
 #### Create your IAM User & Credentials
 
+#### Choose your region
+
+This project sets `us-west-2` as the default region, and `us-west-2d`, 
+`us-west-2c`, `us-west-2b` as the default availability zones. If you dont have 
+a preference, these should work great. If you want to use a different region, 
+you will search/replace all in this project.
+
+
+### Setup `/terraform/bootstrap`
+
+The following steps create:
+
+1. (1) S3 Bucket for storing terraform state (for the remainder of infrastructure) 
+1. (1) DynamoDB table for preventing conflicts during concurrent terraform runs
+1. (2) ECR Repositories: backend, frontend
+
+You will do this "bootstrap" process only once to get everything setup for 
+terraform to work.
+
+1. `cd terraform/bootstrap`
+1. Create bootstrap.tfvars file: `cp bootstrap.tfvars.template bootstrap.tfvars`
+1. Modify bootstrap.tfvars file and replace values with your AWS credential values above
+1. `make tf-init`
+1. `make tf-plan`
+1. `make tf-apply`
+1. `git add .terraform.lock.hcl` - Record the provider selections. Include this file in git so that Terraform can guarantee to make the same selections by default when you run "terraform init" in the future.
+1. `git add terraform.tfstate` - This stores the terraform state for these few bootstrap resources in the `terraform.tfstate` file. This file should be committed to the git repo.
+
+
+### AWS Certificate Manager (ACM)
+
+1. Request a public certificate in [AWS Certificate Manager (ACM)](https://us-west-2.console.aws.amazon.com/acm/home?region=us-west-2#/certificates/request/public) and enter these 2 values:
+   - `my-project.com`
+   - `*.my-project.com`
+1. Find the certificate [here](https://us-west-2.console.aws.amazon.com/acm/home?region=us-west-2#/certificates/list) and click "Create records in Route 53"
+1. You'll need to view the certificate and select "Create records in Route 53". The status will change to "Issued" once the DNS records are created.
+1. Copy the ARN. This is the value for `ACM_CERTIFICATE_ARN` below.
+
+
+### Store Secrets in GitHub (for GitHub Actions)
+
+Go to your project's GitHub repo » Settings » Security » [Secrets and Variables » Actions](https://github.com/codyfletcher/holy-demo/settings/secrets/actions) and create the following secrets:
+
+   - AWS_ACCESS_KEY_ID
+   - AWS_SECRET_ACCESS_KEY
+   - AWS_ACCOUNT_ID
+   - AWS_DEFAULT_REGION: `us-west-2`
+   - TF_BACKEND_REGION: `us-west-2`
+   - TF_BACKEND_BUCKET: `com-my-project-terraform-state`
+   - TF_BACKEND_DYNAMODB_TABLE: `com-my-project-terraform-lock-table`
+   - ACM_CERTIFICATE_ARN
+   - DOMAIN_NAME: `my-project.com`
+
+### Run GitHub Actions to Deploy to AWS
+
+Run each of these workflows in GitHub Actions:
+
+1. Frontend - Build Image & Push to ECR
+1. Backend - Build Image & Push to ECR
+1. Base Environment - Create/Update
+1. App Environment - Create/Update
+1. Backend / Unit Tests 
