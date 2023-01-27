@@ -82,7 +82,7 @@ variable "domain_name" {
 }
 
 ##############################################################################
-# Application Services - Gunicorn, Nginx, Celery Worker, etc.
+# Application Services - Gunicorn, Nginx, Celery Worker, Celery Beat
 ##############################################################################
 
 # Shared
@@ -157,6 +157,26 @@ variable "celery_worker_cpu" {
 }
 
 variable "celery_worker_memory" {
+  default     = 512
+  description = "Amount (in MiB) of memory to allocate for this task"
+  type        = number
+}
+
+# Celery Beat
+
+variable "celery_beat_command" {
+  default     = ["celery", "--app=backend.celery_app:app", "beat", "--loglevel=INFO"]
+  description = "Command used to start celery beat"
+  type        = list(string)
+}
+
+variable "celery_beat_cpu" {
+  default     = 256
+  description = "CPU to allocate for this task (256 = 0.25 vCPU)"
+  type        = number
+}
+
+variable "celery_beat_memory" {
   default     = 512
   description = "Amount (in MiB) of memory to allocate for this task"
   type        = number

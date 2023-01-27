@@ -57,6 +57,10 @@ module "main" {
   celery_worker_cpu = 256
   celery_worker_memory = 512
 
+  # Celery Beat
+  celery_beat_cpu = 256
+  celery_beat_memory = 512
+
   # Backend Update
   backend_update_cpu = 256
   backend_update_memory = 512
