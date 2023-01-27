@@ -1,1 +1,8 @@
+# Private credentials
 bootstrap.tfvars
+
+# Terraform plan file
+tfplan
+
+# Terraform state file backup
+terraform.tfstate.backup
