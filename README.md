@@ -78,7 +78,7 @@ Open a shell, go to your project directory, and run:
 Open a **second** shell, go to your project directory, and run: 
 
 1. Populate example posts: `docker exec -it backend bash -c 'python manage.py generate_posts'`
-1. Create a superuser (`admin@email.com`/`Hunter22!`): `docker exec -it backend bash -c 'DJANGO_SUPERUSER_USERNAME=admin@email.com DJANGO_SUPERUSER_EMAIL=admin@email.com DJANGO_SUPERUSER_PASSWORD=Hunter22! python manage.py createsuperuser --no-input'`
+1. Create a superuser (`admin@domain.com`/`password`): `docker exec -it backend bash -c 'DJANGO_SUPERUSER_USERNAME=admin@domain.com DJANGO_SUPERUSER_EMAIL=admin@domain.com DJANGO_SUPERUSER_PASSWORD=password python manage.py createsuperuser --no-input'`
 
 You can confirm the backend works if the [health check](http://localhost/api/health-check/) page loads.
 

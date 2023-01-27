@@ -59,7 +59,7 @@ poetry-migrate:
 
 ## Create superuser using poetry environment
 poetry-createsuperuser:
-	cd backend && poetry run python3 manage.py createsuperuser --no-input --email user5@email.com
+	cd backend && poetry run python3 manage.py createsuperuser --no-input --email user@domain.com
 
 ## Start local development server using poetry virtual environment
 poetry-runserver:
@@ -139,9 +139,9 @@ venv-migrate:
 venv-make-migrations:
 	backend/manage.py makemigrations
 
-## Create a super user to access the Django admin locally
+## Create a superuser to access the Django admin interface
 venv-createsuperuser:
-	DJANGO_SUPERUSER_PASSWORD=password DJANGO_SUPERUSER_USERNAME=me DJANGO_SUPERUSER_EMAIL=user@email.com backend/manage.py createsuperuser --no-input
+	DJANGO_SUPERUSER_USERNAME=admin@domain.com DJANGO_SUPERUSER_EMAIL=admin@domain.com DJANGO_SUPERUSER_PASSWORD=password backend/manage.py createsuperuser --no-input
 
 # Start the Django application locally using runserver_plus and Werkzeug
 venv-runserver:
