@@ -1,4 +1,4 @@
-name: 3. Update Base Environment
+name: 3. Base Environment - Create/Update
 
 on:
   workflow_dispatch:
