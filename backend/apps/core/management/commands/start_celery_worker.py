@@ -19,8 +19,6 @@ def restart_celery_worker():
     cmd += " -Q default"
     # Run only 1 worker process/thread (for development)
     cmd += " --concurrency=1"
-    # Run celery beat
-    cmd += " --beat"
     subprocess.call(shlex.split(cmd))
 
 
