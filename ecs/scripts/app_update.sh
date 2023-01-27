@@ -21,13 +21,13 @@ NEW_BACKEND_IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/backend:$
 
 # register new task definitions
 # https://docs.aws.amazon.com/cli/latest/reference/ecs/describe-task-definition.html#description
-for TASK in "backend_update" "gunicorn" "celery_worker"
+for TASK in "backend_update" "gunicorn" "celery_worker" "celery_beat"
 do
   echo "Updating $TASK task definition..."
 
   # in Terraform we name our tasks based on the ad hoc environment name
   # (also the Terraform workspace name) and the name of the task
-  # (e.g. backend_update, gunicorn, celery_worker)
+  # (e.g. backend_update, gunicorn, celery_worker, celery_beat)
   TASK_FAMILY=$WORKSPACE-$TASK
 
   # save the task definition JSON to a variable
@@ -160,7 +160,7 @@ aws logs get-log-events \
 echo "Migrations complete. Starting rolling update for backend services..."
 
 # update backend services
-for TASK in "gunicorn" "celery_worker"
+for TASK in "gunicorn" "celery_worker" "celery_beat"
 do
 
   # get taskDefinitionArn for each service to be used in update-service command
@@ -187,7 +187,7 @@ echo "Services updated. Waiting for services to become stable..."
 # wait for all service to be stable (runningCount == desiredCount for each service)
 aws ecs wait services-stable \
   --cluster $WORKSPACE-cluster \
-  --services $WORKSPACE-gunicorn $WORKSPACE-celery_worker
+  --services $WORKSPACE-gunicorn $WORKSPACE-celery_worker $WORKSPACE-celery_beat
 
 echo "Services are now stable. Backend services are now up to date with $BACKEND_IMAGE_TAG."
 

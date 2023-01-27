@@ -73,6 +73,8 @@ services:
       - POSTGRES_SERVICE_HOST=postgres
       - REDIS_SERVICE_HOST=redis
       - DJANGO_SETTINGS_MODULE=backend.settings.development
+      # PIDFILE is for Celery Beat
+      - PIDFILE=/code/celerybeat.pid
     depends_on:
       - postgres
       - redis
@@ -84,6 +86,15 @@ services:
       - "python3"
       - "manage.py"
       - "start_celery_worker"
+    ports: []
+
+  celery_beat:
+    <<: *backend
+    container_name: celery_beat
+    command:
+      - python3
+      - manage.py
+      - start_celery_beat
     ports: []
 
   # migrate command
