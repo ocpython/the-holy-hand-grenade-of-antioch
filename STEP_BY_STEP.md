@@ -1,53 +1,5 @@
 # Steps
 
-## Initial Project Setup
-
-1. Create a new private git repository (e.g. github.com/your_username/myproject)
-2. Copy everything from this repository into it
-3. Replace all instances of `your_username/myproject` with your actual github username and repo 
-4. Replace all instances of `my-project.com` with your project's actual domain name
-5. Replace all instances of `com-my-project` with your domain using *reverse domain name*  (Note: all "." are replaced with "-")
-6. Replace all instances of `myproject` with your project name 
-
-## Setting up AWS Account
-
-1.
-
-----
-
-## Backend (Django)
-
-### Run containers / populate database
-
-#### Run the following in "terminal 1"
-
-1. Start containers: `docker compose up --build`
-
-#### Run the following in "terminal 2"
-
-##### Backend (Python/Django)
-
-1. Populate example posts: `docker exec -it backend bash -c 'python manage.py generate_posts'`
-1. Create a superuser (`admin`/`Hunter22!`): `docker exec -it backend bash -c 'DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_PASSWORD=Hunter22! DJANGO_SUPERUSER_EMAIL=admin@email.com python manage.py createsuperuser --no-input'`
-
-You can confirm the backend works here: 
-
-- [http://localhost/api/health-check/](http://localhost/api/health-check/)
-
-##### Frontend (Vue/Quasar)
-
-1. `make quasar-install`
-1. make quasar-dev
-   ```
-   # If the above command fails with `/bin/sh: quasar: command not found`, try this:
-   cd quasar-app && npm link @quasar/cli
-   ```
-
-You can confirm frontend works here (Browser should automatically open):
-
-- [http://localhost:8081/](http://localhost:8081/)
-
-
 ## Setting Up Local Virtual Environment
 
 1. Install python: `pyenv install 3.9`
@@ -74,14 +26,6 @@ To use the virtual environment, run `direnv allow` in the root of the project.
 2. Username: `postgres`
 3. Password: `postgres`
 
-
-# Confirm things are running
-
-1. Backend, health check: [http://localhost/api/health-check/](http://localhost/api/health-check/)
-1. Backend, view a post: [http://localhost/api/drf/fbv/posts/1/](http://localhost/api/drf/fbv/posts/1/)
-1. Backend, view Django Admin Panel: [http://localhost/admin](http://localhost/admin)
-1. Frontend: [http://localhost:8081/](http://localhost:8081/)
-1. Flower (monitor Celery tasks): [http://localhost:49555/](http://localhost:49555/)
 
 
 # Deploying
