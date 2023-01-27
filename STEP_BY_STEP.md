@@ -17,17 +17,6 @@
 
 ## Backend (Django)
 
-### Copy files/directories 
-
-From `django-step-by-step` repo...
-
-1. `backend/`
-1. `nginx/`
-1. `.gitignore`
-1. `.coveragerc`
-1. `.dockerignore`
-1. `docker-compose.yml`
-
 ### Run containers / populate database
 
 #### Run the following in "terminal 1"
@@ -36,35 +25,27 @@ From `django-step-by-step` repo...
 
 #### Run the following in "terminal 2"
 
+##### Backend (Python/Django)
+
 1. Populate example posts: `docker exec -it backend bash -c 'python manage.py generate_posts'`
-1. Create superuser: `docker exec -it backend bash -c 'DJANGO_SUPERUSER_PASSWORD=Hunter22! DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@email.com python manage.py createsuperuser --no-input'`
-1. Run migrations: `docker exec -it backend bash -c 'python manage.py migrate'`
+1. Create a superuser (`admin`/`Hunter22!`): `docker exec -it backend bash -c 'DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_PASSWORD=Hunter22! DJANGO_SUPERUSER_EMAIL=admin@email.com python manage.py createsuperuser --no-input'`
 
-You can confirm backend works [here](http://localhost/api/health-check/). More URLs listed below.
+You can confirm the backend works here: 
 
+- [http://localhost/api/health-check/](http://localhost/api/health-check/)
 
-## Frontend (Vue/Quasar)
+##### Frontend (Vue/Quasar)
 
-### Copy files/directories 
+1. `make quasar-install`
+1. make quasar-dev
+   ```
+   # If the above command fails with `/bin/sh: quasar: command not found`, try this:
+   cd quasar-app && npm link @quasar/cli
+   ```
 
-From `django-step-by-step` repo...
+You can confirm frontend works here (Browser should automatically open):
 
-1. `quasar-app/`
-
-### Run...
-
-```shell
-make quasar-install
-
-make quasar-dev
-# If the above command fails with `/bin/sh: quasar: command not found`, try this:
-#cd quasar-app && npm link @quasar/cli
-
-```
-
-You can confirm frontend works here:
-
-1. Browser should automatically open to: [http://localhost:8081/](http://localhost:8081/)
+- [http://localhost:8081/](http://localhost:8081/)
 
 
 ## Setting Up Local Virtual Environment
