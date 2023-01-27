@@ -1,0 +1,11 @@
+/* Roboto Slab Bold */
+@font-face {
+    font-family: "Roboto Slab";
+    font-weight: 700;
+    font-style: normal;
+    font-display: auto;
+    src: local("Roboto Slab Bold"),
+         local("RobotoSlab-Bold"),
+         url("~typeface-roboto-slab/files/roboto-slab-latin-700.woff2") format("woff2"),
+         url("~typeface-roboto-slab/files/roboto-slab-latin-700.woff") format("woff");
+}

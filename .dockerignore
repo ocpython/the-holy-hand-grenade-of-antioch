@@ -1,0 +1,9 @@
+media
+.local-env
+.github
+.pytest_cache
+.vscode
+docs
+notes
+quasar-app/node_modules
+quasar-app/dist

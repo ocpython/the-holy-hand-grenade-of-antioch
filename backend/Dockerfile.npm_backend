@@ -1,0 +1,7 @@
+FROM node:18 AS assets
+COPY  ./ /npm_stuff/
+WORKDIR /npm_stuff
+ENV NODE_ENV=prod
+
+RUN npm install --omit optional
+RUN npm run build

@@ -1,0 +1,23 @@
+/* Black */
+@font-face {
+    font-family: "Roboto";
+    font-weight: 900;
+    font-style: normal;
+    font-display: auto;
+    src: local("Roboto Black"),
+         local("Roboto-Black"),
+         url("~typeface-roboto/files/roboto-latin-900.woff2") format("woff2"),
+         url("~typeface-roboto/files/roboto-latin-900.woff") format("woff");
+}
+
+/* Black Italic */
+@font-face {
+    font-family: "Roboto";
+    font-weight: 900;
+    font-style: italic;
+    font-display: auto;
+    src: local("Roboto Black Italic"),
+         local("Roboto-BlackItalic"),
+         url("~typeface-roboto/files/roboto-latin-900italic.woff2") format("woff2"),
+         url("~typeface-roboto/files/roboto-latin-900italic.woff") format("woff");
+}

@@ -1,0 +1,96 @@
+// SPDX-License-Identifier: MIT
+
+.theme-light {
+  --color-primary: #51bfff;
+  --color-secondary: #ffffff;
+  --font-color: #000000;
+}
+
+.theme-dark {
+  --color-primary: #4e4e4e;
+  --color-secondary: #0c1a25;
+  --font-color: #ffffff;
+}
+
+body{
+  background: var(--color-secondary);
+}
+
+.content {
+  background: var(--color-secondary);
+  color: var(--font-color);
+}
+
+.content button {
+  color: var(--font-color);
+  background: var(--color-primary);
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2020203d;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 42px;
+  width: 42px;
+  left: -10px;
+  bottom: 0;
+  top: 0;
+  margin: auto 0;
+  transition: 0.4s;
+  background: white url("../images/night.svg");
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 0 15px #2020203d;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  background: white url("../images/day.svg");
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

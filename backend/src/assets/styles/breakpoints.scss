@@ -1,0 +1,50 @@
+// SPDX-License-Identifier: MIT
+
+@mixin bp-xl {
+  @media only screen and (min-width: 991px) {
+    @content;
+  }
+}
+
+@mixin bp-lg {
+  @media only screen and (min-width: 767px) {
+    @content;
+  }
+}
+
+@mixin bp-md {
+  @media only screen and (min-width: 575px) {
+    @content;
+  }
+}
+
+@mixin bp-sm {
+  @media only screen and (min-width: 0) {
+    @content;
+  }
+}
+
+@mixin breakpoint($name) {
+  &:after {
+    content: $name;
+    display: none;
+  }
+}
+
+body {
+  @include bp-sm() {
+    @include breakpoint("sm");
+  }
+
+  @include bp-md() {
+    @include breakpoint("md");
+  }
+
+  @include bp-lg() {
+    @include breakpoint("lg");
+  }
+
+  @include bp-xl() {
+    @include breakpoint("xl");
+  }
+}

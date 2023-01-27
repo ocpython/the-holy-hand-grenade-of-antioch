@@ -1,0 +1,23 @@
+/* Thin */
+@font-face {
+    font-family: "Roboto";
+    font-weight: 100;
+    font-style: normal;
+    font-display: auto;
+    src: local("Roboto Thin"),
+         local("Roboto-Thin"),
+         url("~typeface-roboto/files/roboto-latin-100.woff2") format("woff2"),
+         url("~typeface-roboto/files/roboto-latin-100.woff") format("woff");
+}
+
+/* Thin Italic */
+@font-face {
+    font-family: "Roboto";
+    font-weight: 100;
+    font-style: italic;
+    font-display: auto;
+    src: local("Roboto Thin Italic"),
+         local("Roboto-ThinItalic"),
+         url("~typeface-roboto/files/roboto-latin-100italic.woff2") format("woff2"),
+         url("~typeface-roboto/files/roboto-latin-100italic.woff") format("woff");
+}

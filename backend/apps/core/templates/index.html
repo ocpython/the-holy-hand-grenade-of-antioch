@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Title -->
+
+{% block title %}All Posts{% endblock %}
+
+<!-- Nav -->
+
+{% block nav_title %}All Posts{% endblock %}
+
+<!-- Content -->
+
+{% block content %}
+      <section class="jumbotron text-center pt-4">
+        <div class="container">
+          <h1 class="jumbotron-heading">welcome to μblog!</h1>
+          <p class="lead text-muted">
+            μblog is a reference application built with Django and Vue.js.
+            It is a reference project that implements a simple microblogging application.
+          </p>
+          <p>
+            <a href="{% url 'new-post' %}" class="btn btn-primary my-2">Write your first μblog post</a>
+            <a href="{% url 'list-posts' %}" class="btn btn-dark my-2">Go to μblog posts</a>
+          </p>
+        </div>
+      </section>
+
+
+
+      <section>
+      <div class="py-5 bg-light">
+        <div class="container">
+
+          <h2 class="text-center pb-4">μblog is built with open-source technologies</h2>
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <div class="card mb-4">
+                <img class="card-img-top p-2" src="{% static 'img/django.jpeg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Django is the web framework that powers μblog. It handles the data persistence and server-rendered templates.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="card mb-4">
+                <img class="card-img-top p-2" src="{% static 'img/vue3.png' %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">μblog is built with Vue 3 and takes advantage of the composition API and TypeScript integration. Vue is also used for interactivity in Django server-rendered templates</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="card mb-4">
+                <img
+                  class="card-img-top p-2"
+                  src="{% static 'img/drf_square.png' %}"
+                  alt="Card image cap"
+                >
+                <div class="card-body">
+                  <p class="card-text">Django REST Framework powers the REST API in the Django application. This allows the frontend application to query data from μblog.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="card mb-4">
+                <img class="card-img-top p-2" src="{% static 'img/quasar.png' %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Quasar is a Vue Framework that μblog uses. It offers a component library that follows the Material UI spec and allows for multiple built targets including SPA, PWA and SSR.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <section class="text-center">
+          <p>
+            <a href="{{ FRONTEND_URL }}" class="btn btn-primary my-2">View all technologies</a>
+          </p>
+      </section>
+      <section>
+        <div class="container">
+          <div class="card">
+            <div class="card-header">
+              more info on μblog
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">μblog is full-stack reference application</h5>
+              <p class="card-text">
+                μblog is a project that aims to be a guide for full-stack application development.
+                It focuses equally on frontend, backend, DevOps and local development environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

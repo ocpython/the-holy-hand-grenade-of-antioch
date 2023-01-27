@@ -1,0 +1,50 @@
+name: 5. Frontend - Build Image & Push to ECR
+
+on:
+  push:
+    tags:
+      - "frontend/v*"
+  workflow_dispatch:
+
+
+jobs:
+  build_and_push:
+    name: "Build Frontend Image From Git Tag"
+    environment: terraform-aws-ecs
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.git_tag }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: "Build & Push Frontend Docker Image"
+        env:
+          GIT_TAG: ${{ github.ref_name }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: |
+
+          TAG="${GIT_TAG##*/}"
+
+          IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/frontend
+
+          docker build \
+            --build-arg VERSION=$TAG \
+            -t $IMAGE_URI:$TAG \
+            -t $IMAGE_URI:latest \
+            -f nginx/ecs/Dockerfile \
+            .
+
+          docker push --all-tags $IMAGE_URI

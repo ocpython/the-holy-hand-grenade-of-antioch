@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+    {# CSS #}
+    <link href="{% static 'dist/styles/app.css' %}" rel="stylesheet" type="text/css">
+
+    <title>{% block title %}My site{% endblock %}</title>
+</head>
+<body>
+
+<main>
+    {% include "nav.html" %}
+    <div>
+        <div class="bg-light p-2 pt-4 rounded">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible alert-{% if message.tags == "error" %}danger{% else %}{{ message.tags }}{% endif %}">
+                        {{ message|safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="col-sm-10 mx-auto">{% block content %}{% endblock %}</div>
+        </div>
+    </div>
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p>μblog - a simple microblogging application.</p>
+    </div>
+</footer>
+
+{#<script src="{% static 'dist/vendors.js' %}"></script>#}
+<script src="{% static 'dist/app.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* Roboto Condensed Regular */
+@font-face {
+    font-family: "Roboto Condensed";
+    font-weight: 400;
+    font-style: normal;
+    font-display: auto;
+    src: local("Roboto Condensed Regular"),
+         local("RobotoCondensed-Regular"),
+         url("~typeface-roboto-condensed/files/roboto-condensed-latin-400.woff2") format("woff2"),
+         url("~typeface-roboto-condensed/files/roboto-condensed-latin-400.woff") format("woff");
+}
+
+/* Roboto Condensed Regular Italic */
+@font-face {
+    font-family: "Roboto Condensed";
+    font-weight: 400;
+    font-style: italic;
+    font-display: auto;
+    src: local("Roboto Condensed Regular Italic"),
+         local("RobotoCondensed-RegularItalic"),
+         url("~typeface-roboto-condensed/files/roboto-condensed-latin-400italic.woff2") format("woff2"),
+         url("~typeface-roboto-condensed/files/roboto-condensed-latin-400italic.woff") format("woff");
+}

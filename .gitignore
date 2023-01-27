@@ -1,0 +1,13 @@
+.local-env/
+.coverage
+htmlcov
+node_modules
+notes
+.venv
+
+# Redis .rdb files
+*.rdb
+
+.terraform
+
+.envrc

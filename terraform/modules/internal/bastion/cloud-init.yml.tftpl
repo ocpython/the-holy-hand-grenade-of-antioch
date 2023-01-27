@@ -1,0 +1,31 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - postgresql
+  - socat
+write_files:
+  - content: |
+      # /etc/systemd/system/socat-forwarder.service
+      [Unit]
+      Description=socat forwarder service
+      After=socat-forwarder.service
+      Requires=socat-forwarder.service
+
+      [Service]
+      Type=simple
+      StandardOutput=syslog
+      StandardError=syslog
+      SyslogIdentifier=socat-forwarder
+
+      ExecStart=/usr/bin/socat -d -d TCP4-LISTEN:5432,fork TCP4:${rds_address}:5432
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/socat-forwarder.service
+
+runcmd:
+  - [ systemctl, daemon-reload ]
+  - [ systemctl, enable, socat-forwarder.service ]
+  # https://dustymabe.com/2015/08/03/installingstarting-systemd-services-using-cloud-init/
+  - [ systemctl, start, --no-block, socat-forwarder.service ]

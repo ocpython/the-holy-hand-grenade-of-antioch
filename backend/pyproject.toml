@@ -1,0 +1,79 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+
+[tool.poetry.dependencies]
+python = "~=3.9.13"
+
+Django = "3.2.16"
+djangorestframework = "3.14.0"
+
+# redis
+redis = "4.4.2"
+
+# celery
+celery= "5.2.7"
+
+# for OpenAPI
+uritemplate = "3.0.1"
+coreapi = "2.3.3"
+
+gunicorn = "20.1.0"
+psycopg2-binary = "2.9.5"
+aws-secretsmanager-caching = "1.1.1.5"
+Pillow = "9.4.0"
+django-storages = "1.13.2"
+dj-database-url = "0.5.0"
+whitenoise = "5.3.0"
+boto3 = "1.26.49"
+django-cors-headers = "3.13.0"
+djangorestframework-simplejwt = "5.2.2"
+
+# sentry SDK
+sentry-sdk = "1.13.0"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+
+# test dependencies
+black = "22.12.0"
+flake8 = "4.0.1"
+pytest = "7.2.1"
+pytest-cov = "3.0.0"
+pytest-django = "4.5.2"
+
+# factory
+factory-boy = "3.2.1"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+
+django-debug-toolbar = "3.8.1"
+
+# for runserver_plus
+django-extensions = "3.2.1"
+Werkzeug = "2.2.2"
+
+# for Jupyter notebooks
+ipython = "7.34.0"
+# jupyter's dependency on argon2-cffi can't be installed on Apple M1
+jupyter = { version = "1.0.0", markers = "platform_machine == 'x86_64'" }
+notebook = "6.5.2"
+
+# faker
+faker = "11.4.0"
+
+# django-silk
+django-silk = "4.4.1"
+
+# flower
+flower = "1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

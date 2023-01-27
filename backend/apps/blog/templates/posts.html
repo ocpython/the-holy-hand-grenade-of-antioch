@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!-- Title -->
+
+{% block title %}All Posts{% endblock %}
+
+<!-- Nav -->
+
+{% block nav_title %}All Posts{% endblock %}
+
+<!-- Content -->
+
+{% block content %}
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h2>Posts ({{ page_obj.paginator.count }}) - <small>Function-based views</small></h2>
+
+<div>
+  {% for post in page_obj %}
+  <a href="{% url 'post' id=post.id %}" style="text-decoration: none; color: #000">
+    <div class="card p-4 mb-2">
+      {% if post.image %}
+      <img src={{ post.image.url }} alt="{{ post.body }}" class="post-image" />
+      {% endif %}
+      <div class="">{{ post.body }}</div>
+      <div class="">{{ post.created_on }}</div>
+      {% if post.created_by %}
+      <div>{{ post.created_by }}</div>
+      {% endif %}
+      {% include "post_likes.html" with post=post %}
+    </div>
+  </a>
+  {% endfor %}
+  {% include "post_pagination.html" with page_obj=page_obj %}
+</div>
+
+{% endblock %}
