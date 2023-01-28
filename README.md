@@ -154,7 +154,7 @@ terraform to work.
 
 ### Store Secrets in GitHub (for GitHub Actions)
 
-Go to your project's GitHub repo » Settings » Security » [Secrets and Variables » Actions](https://github.com/codyfletcher/holy-demo/settings/secrets/actions) and create the following secrets:
+Go to your project's GitHub repo » Settings » Security » [Secrets and Variables » Actions](https://github.com/your_username/myproject/settings/secrets/actions) and create the following secrets:
 
    - AWS_ACCESS_KEY_ID
    - AWS_SECRET_ACCESS_KEY
