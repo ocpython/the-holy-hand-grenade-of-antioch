@@ -3,7 +3,7 @@ version: "2.4"
 services:
 
   nginx:
-    container_name: nginx
+    container_name: myproject_nginx
     build:
       context: ./nginx
       dockerfile: dev/Dockerfile
@@ -17,7 +17,7 @@ services:
       - main
 
   postgres:
-    container_name: postgres
+    container_name: myproject_postgres
     image: postgres:14
     networks:
       - main
@@ -29,29 +29,15 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   redis:
+    container_name: myproject_redis
     image: redis:alpine
     volumes:
       - redis-data:/data
-    container_name: redis
-    networks:
-      - main
-
-  redis-commander:
-    container_name: redis-commander
-    hostname: redis-commander
-    image: rediscommander/redis-commander:latest
-    restart: always
-    environment:
-      - REDIS_HOST=redis
-    ports:
-      - "8085:8081"
-    depends_on:
-      - "redis"
     networks:
       - main
 
   backend: &backend
-    container_name: backend
+    container_name: myproject_backend
     build:
       context: ./backend
       target: local_development
@@ -81,7 +67,7 @@ services:
 
   celery_worker:
     <<: *backend
-    container_name: celery_worker
+    container_name: myproject_celery_worker
     command:
       - "python3"
       - "manage.py"
@@ -90,7 +76,7 @@ services:
 
   celery_beat:
     <<: *backend
-    container_name: celery_beat
+    container_name: myproject_celery_beat
     command:
       - python3
       - manage.py
@@ -100,7 +86,7 @@ services:
   # migrate command
   migrate:
     <<: *backend
-    container_name: migrate
+    container_name: myproject_migrate
     command:
       - python3
       - manage.py
@@ -114,7 +100,7 @@ services:
 
   notebook:
     <<: *backend
-    container_name: notebook
+    container_name: myproject_notebook
     command:
       - python3
       - manage.py
@@ -123,7 +109,7 @@ services:
     ports:
       - "8888:8888"
 
-  mailhog:
+  mailhog:myproject_
     container_name: mailhog
     image: mailhog/mailhog
     ports:
@@ -133,7 +119,7 @@ services:
       - main
 
   flower:
-    container_name: flower
+    container_name: myproject_flower
     image: mher/flower
     ports:
       - "49555:5555"
@@ -143,6 +129,20 @@ services:
       - celery_worker
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/1
+
+  redis_commander:
+    container_name: myproject_redis_commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - "8085:8081"
+    depends_on:
+      - "redis"
+    networks:
+      - main
 
 volumes:
   pg-data:
