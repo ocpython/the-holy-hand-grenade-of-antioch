@@ -89,15 +89,15 @@ While your containers are running, continue on in the second shell:
 1. `make quasar-dev`
    If this command fails with `/bin/sh: quasar: command not found`, try this: `cd quasar-app && npm link @quasar/cli && cd ..`
 
-You can confirm frontend works (browser should open automatically): [http://localhost:8081/](http://localhost:8081/)
+You can confirm frontend works (browser will open automatically to port [8081](http://localhost:8081/), but you should be able to access things on the [default port 80](http://localhost/)): 
 
 ### All Development URLs:
 
 1. Health Check Page: [http://localhost/api/health-check/](http://localhost/api/health-check/)
+1. Frontend: [http://localhost/](http://localhost/)
 1. Backend App: [http://localhost/mtv/](http://localhost/mtv/)
 1. Django Admin Interface [http://localhost/admin/](http://localhost/admin/) (sign-in with your credentials set above)
 1. View a Post (REST API): [http://localhost/api/drf/fbv/posts/1/](http://localhost/api/drf/fbv/posts/1/)
-1. Frontend: [http://localhost:8081/](http://localhost:8081/)
 1. Flower (monitor Celery tasks): [http://localhost:49555/](http://localhost:49555/)
 1. Jupyter (Python Notebooks): [http://localhost:8888/](http://localhost:8888/)
 1. Mailhog: [http://localhost:8025/](http://localhost:8025/)
