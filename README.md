@@ -63,6 +63,7 @@ Here's what you'll need:
    1. `your_username/myproject` - with your actual github username and repo 
    1. `my-project.com` - with your project's actual domain name
    1. `com-my-project` - with your *reverse domain name*  (Note: all "." are replaced with "-")
+   1. `myproject_` - with a unique project prefix for development (e.g. `abc_`)
 
 ## Run in Development
 
