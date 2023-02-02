@@ -42,7 +42,7 @@ To use the virtual environment, run `direnv allow` in the root of the project.
 
 ### SSH into AWS environment
 
-1. Run `make ad-hoc-ecs-exec` (enter "staging" for environment name)
+1. Run `make ecs-exec` (enter "staging" for environment name)
 1. After in `./manage.py createsuperuser`
 
 ### Upgrading terraform
