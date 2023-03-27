@@ -11,7 +11,7 @@ Django = "4.1.6"
 djangorestframework = "3.14.0"
 
 # redis
-redis = "4.4.2"
+redis = "4.5.3"
 
 # celery
 celery= "5.2.7"
